@@ -1,59 +1,59 @@
 :root {
-    --dark-theme-background-color: hsl(0, 0%, 12.5%);
-    --dark-theme-font-color: hsl(0, 0%, 80%);
+  --dark-theme-background-color: hsl(0, 0%, 12.5%);
+  --dark-theme-font-color: hsl(0, 0%, 80%);
 }
 
 body {
-    background-color: var(--dark-theme-background-color);
-    color: var(--dark-theme-font-color);
+  background-color: var(--dark-theme-background-color);
+  color: var(--dark-theme-font-color);
 }
 
 #contents {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #forecast {
-    display: flex;
-    margin-top: 150px;
+  display: flex;
+  margin-top: 150px;
 }
 
 #forecast > * {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
 }
 
 #main-weather {
-    display: grid;
-    grid-template-columns: auto auto;
-    column-gap: 50px;
-    align-items: center;
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 50px;
+  align-items: center;
 }
 
 #search-bar {
-    background-color: var(--dark-theme-background-color);
-    border-color: hsl(0, 0%, 30%);
-    border-radius: 50px;
-    color: var(--dark-font-color);
-    font-size: 1.3rem;
-    margin-bottom: 100px;
-    text-align: center;
+  background-color: var(--dark-theme-background-color);
+  border-color: hsl(0, 0%, 30%);
+  border-radius: 50px;
+  color: var(--dark-font-color);
+  font-size: 1.3rem;
+  margin-bottom: 100px;
+  text-align: center;
 }
 
 #temperature {
-    font-size: 4rem;
-    font-weight: 600;
+  font-size: 4rem;
+  font-weight: 600;
 }
 
 #temperature-feels-like {
-    display: flex;
-    font-size: 0.9rem;
+  display: flex;
+  font-size: 0.9rem;
 }
 
 .label {
-    margin-right: 5px;
+  margin-right: 5px;
 }
