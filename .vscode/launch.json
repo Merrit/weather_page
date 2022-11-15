@@ -5,9 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch",
-            "type": "node",
+            "type": "chrome",
+            "name": "Debug",
             "request": "launch",
+            "url": "http://localhost:8080/",
             "preLaunchTask": "start"
         }
     ]

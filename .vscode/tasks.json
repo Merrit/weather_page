@@ -4,9 +4,9 @@
 		{
 			"type": "npm",
 			"script": "start",
-			"problemMatcher": [],
 			"label": "start",
-			"detail": "webpack serve --open"
+			"isBackground": true,
+			"detail": "webpack serve",
 		}
 	]
 }
