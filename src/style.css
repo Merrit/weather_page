@@ -49,6 +49,7 @@ body {
   border: 0;
   cursor: pointer;
   font-size: 1.3rem;
+  opacity: 0;
   position: absolute;
   right: 15px;
   top: 7px;

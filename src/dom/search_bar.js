@@ -73,6 +73,15 @@ class SearchBar {
     };
 
     this.#searchButtonElement.onclick = () => this.#search();
+
+    // Only show search button when input has focus.
+    this.#searchBarElement.onfocus = () => {
+      this.#searchButtonElement.style.opacity = '1';
+    };
+
+    this.#searchBarElement.onblur = () => {
+      this.#searchButtonElement.style.opacity = '0';
+    };
   }
 
   /**
