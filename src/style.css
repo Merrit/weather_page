@@ -8,6 +8,16 @@ body {
   color: var(--dark-theme-font-color);
 }
 
+/* Disable the different color background for autocomplete. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  box-shadow: 0 0 0 30px var(--dark-theme-background-color) inset !important;
+  -webkit-box-shadow: 0 0 0 30px var(--dark-theme-background-color) inset !important;
+  -webkit-text-fill-color: var(--dark-theme-font-color) !important;
+}
+
 #contents {
   display: flex;
   flex-direction: column;
