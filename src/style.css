@@ -33,6 +33,7 @@ body {
   grid-template-columns: auto auto;
   column-gap: 50px;
   align-items: center;
+  justify-items: center;
 }
 
 #search-bar {
