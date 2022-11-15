@@ -59,13 +59,21 @@ class DOM {
     // If for some reason we didn't get initial data we will forego loading
     // weather data and display default placeholders.
     if (initialWeatherData === null || initialForecastData === null) {
-      // Set message about no data or w/e.
+      this.showError();
       return;
     }
 
     this.loadNewWeatherData(initialWeatherData, initialForecastData);
 
     DOM.instance = this;
+  }
+
+  showError() {
+    const mainWeatherElement = /** @type {HTMLDivElement} */ (
+      document.getElementById('main-weather')
+    );
+    mainWeatherElement.innerHTML =
+      'Unable to get weather data. Try refreshing the page in a minute.';
   }
 
   /**
