@@ -39,7 +39,7 @@ body {
 #search-bar {
   background-color: transparent;
   border: 0;
-  color: var(--dark-font-color);
+  color: var(--dark-theme-font-color);
   outline: none;
   font-size: 1.3rem;
   text-align: center;
