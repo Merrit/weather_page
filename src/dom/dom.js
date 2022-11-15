@@ -1,5 +1,7 @@
 // @ts-check
 
+/* eslint-disable max-classes-per-file */
+
 // eslint-disable-next-line no-unused-vars
 import Forecast from '../weather/forecast';
 // eslint-disable-next-line no-unused-vars
@@ -9,9 +11,6 @@ import Weather from '../weather/weather';
  * Handles interfacing with the UI.
  */
 class DOM {
-  /** @type {HTMLInputElement} */
-  #searchBarElement;
-
   /** @type {HTMLDivElement} */
   #temperatureElement;
 
@@ -28,13 +27,19 @@ class DOM {
   #forecastAreaElement;
 
   /**
-   * @param {Weather} [initialWeatherData]
-   * @param {Forecast} [initialForecastData]
+   * Singleton instance access for the DOM.
+   * @type {DOM}
+   */
+  static instance;
+
+  /**
+   * @param {Weather | null} initialWeatherData
+   * @param {Forecast | null} initialForecastData
    */
   constructor(initialWeatherData, initialForecastData) {
-    this.#searchBarElement = /** @type {HTMLInputElement} */ (
-      document.getElementById('search-bar')
-    );
+    // Singleton class.
+    if (typeof DOM.instance !== 'undefined') return;
+
     this.#temperatureElement = /** @type {HTMLDivElement} */ (
       document.getElementById('temperature')
     );
@@ -53,29 +58,28 @@ class DOM {
 
     // If for some reason we didn't get initial data we will forego loading
     // weather data and display default placeholders.
-    if (
-      typeof initialWeatherData === 'undefined' ||
-      typeof initialForecastData === 'undefined'
-    ) {
+    if (initialWeatherData === null || initialForecastData === null) {
       // Set message about no data or w/e.
       return;
     }
 
-    this.updateLocationName(initialWeatherData.locationName);
-    this.updateTemperature(initialWeatherData.temperature.actual);
-    this.updateFeelsLike(initialWeatherData.temperature.feelsLike);
-    this.updateWeatherIcon(initialWeatherData.icon);
-    this.updateDescription(initialWeatherData.description);
-    this.updateForecastArea(initialForecastData);
+    this.loadNewWeatherData(initialWeatherData, initialForecastData);
+
+    DOM.instance = this;
   }
 
   /**
-   * Update the location name displayed inside the search box.
+   * Populate the DOM with the provided weather data.
    *
-   * @param {string | null} name
+   * @param {Weather} weatherData
+   * @param {Forecast} forecastData
    */
-  updateLocationName(name) {
-    this.#searchBarElement.placeholder = name ?? '';
+  loadNewWeatherData(weatherData, forecastData) {
+    this.updateTemperature(weatherData.temperature.actual);
+    this.updateFeelsLike(weatherData.temperature.feelsLike);
+    this.updateWeatherIcon(weatherData.icon);
+    this.updateDescription(weatherData.description);
+    this.updateForecastArea(forecastData);
   }
 
   /**
@@ -118,8 +122,6 @@ class DOM {
    * @param {string} iconId
    */
   updateWeatherIcon(iconId) {
-    // const iconUrl = `http://openweathermap.org/img/wn/${iconId}@2x.png`;
-    // this.#weatherIconElement.src = iconUrl;
     this.#weatherIconElement.src = this.#getIconUrl(iconId);
   }
 
@@ -140,6 +142,9 @@ class DOM {
    * @param {Forecast} forecast
    */
   updateForecastArea(forecast) {
+    // Reset forecast widgets so it can be populated with new data.
+    this.#forecastAreaElement.replaceChildren();
+
     forecast.days.forEach((day) => {
       const forecastWidget = document.createElement('div');
 

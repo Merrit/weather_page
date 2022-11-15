@@ -1,5 +1,6 @@
-/* eslint-disable no-param-reassign */
 // @ts-check
+
+/* eslint-disable no-param-reassign */
 
 import getAverage from '../helpers/average';
 import getMostOccurrences from '../helpers/most_occurrences';
@@ -38,9 +39,12 @@ class Forecast {
       );
     }
 
-    dayArrays.forEach((dayArray) =>
-      this.days.push(Forecast.weatherFromHourlySnapshots(dayArray)),
-    );
+    dayArrays.forEach((dayArray) => {
+      // Some locations seem to return many days worth; we will only bother with
+      // a 5-day forecast.
+      if (this.days.length > 4) return;
+      this.days.push(Forecast.weatherFromHourlySnapshots(dayArray));
+    });
 
     this.days.forEach((day) => {
       day.locationName = json.city.name;

@@ -17,7 +17,7 @@ class WeatherService {
    * Fetches weather data for the provided [location].
    *
    * @param {string} location
-   * @return {Promise<Weather>}
+   * @return {Promise<Weather | null>}
    */
   async getCurrentWeather(location) {
     const response = await fetch(
@@ -25,6 +25,9 @@ class WeatherService {
         this.#kApiKey
       }&units=${this.#units}`,
     );
+
+    if (response.status === 404) return null;
+
     const data = await response.json();
     const weather = Weather.fromJson(data);
     return weather;
