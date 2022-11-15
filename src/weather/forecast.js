@@ -40,9 +40,6 @@ class Forecast {
     }
 
     dayArrays.forEach((dayArray) => {
-      // Some locations seem to return many days worth; we will only bother with
-      // a 5-day forecast.
-      if (this.days.length > 4) return;
       this.days.push(Forecast.weatherFromHourlySnapshots(dayArray));
     });
 
